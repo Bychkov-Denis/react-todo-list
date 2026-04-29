@@ -53,7 +53,7 @@ function App() {
     [setTasks],
   );
 
-  const getFilteredTasks = useMemo(() => {
+  const filteredTasks = useMemo(() => {
     switch (filter) {
       case 'active':
         return tasks.filter(task => !task.isDone);
@@ -63,8 +63,6 @@ function App() {
         return tasks;
     }
   }, [tasks, filter]);
-
-  const filteredTasks = getFilteredTasks();
 
   return (
     <>
