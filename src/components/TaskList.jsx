@@ -1,5 +1,6 @@
 import { Empty, Flex } from 'antd';
 import TaskItem from './TaskItem';
+import { memo } from 'react';
 
 const TaskList = ({
   tasks,
@@ -34,4 +35,4 @@ const TaskList = ({
   );
 };
 
-export default TaskList;
+export default memo(TaskList);

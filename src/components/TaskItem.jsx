@@ -9,7 +9,7 @@ import {
   Typography,
   theme,
 } from 'antd';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { toast } from 'react-toastify';
 
 const { Text } = Typography;
@@ -96,4 +96,4 @@ const TaskItem = ({ task, deleteTask, changeIsDone, saveNewTaskTitle }) => {
   );
 };
 
-export default TaskItem;
+export default memo(TaskItem);
