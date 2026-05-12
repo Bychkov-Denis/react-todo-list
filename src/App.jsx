@@ -2,56 +2,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import './reset.css';
 
-import { useCallback, useMemo, useState } from 'react';
-import { Bounce, toast, ToastContainer } from 'react-toastify';
+import { useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Bounce, ToastContainer } from 'react-toastify';
 import Container from './components/Container';
 import Header from './components/Header';
 import InputTask from './components/InputTask';
 import TaskFilter from './components/TaskFilter';
 import TaskList from './components/TaskList';
-import { useLocalStorage } from './hooks/useLocalStorage';
 
 function App() {
-  const [tasks, setTasks] = useLocalStorage('tasks', []);
+  const tasks = useSelector(store => store.tasks);
   const [filter, setFilter] = useState('all');
-
-  const deleteTask = useCallback(
-    id => {
-      setTasks(tasks => tasks.filter(task => task.id !== id));
-      toast.success('Задача успешно удалена');
-    },
-    [setTasks],
-  );
-
-  const changeIsDone = useCallback(
-    id => {
-      setTasks(tasks =>
-        tasks.map(task => {
-          if (task.id === id) {
-            return { ...task, isDone: !task.isDone };
-          } else {
-            return task;
-          }
-        }),
-      );
-    },
-    [setTasks],
-  );
-
-  const saveNewTaskTitle = useCallback(
-    (id, newTitle) => {
-      setTasks(tasks =>
-        tasks.map(task => {
-          if (task.id === id) {
-            return { ...task, title: newTitle };
-          } else {
-            return task;
-          }
-        }),
-      );
-    },
-    [setTasks],
-  );
 
   const filteredTasks = useMemo(() => {
     switch (filter) {
@@ -73,14 +35,8 @@ function App() {
           currentFilter={filter}
           onFilterChange={setFilter}
         />
-        <InputTask setTasks={setTasks} />
-        <TaskList
-          tasks={filteredTasks}
-          deleteTask={deleteTask}
-          changeIsDone={changeIsDone}
-          saveNewTaskTitle={saveNewTaskTitle}
-          currentFilter={filter}
-        />
+        <InputTask />
+        <TaskList currentFilter={filter} tasks={filteredTasks} />
       </Container>
       <ToastContainer
         position="bottom-right"
