@@ -1,6 +1,6 @@
 import { Empty, Flex } from 'antd';
-import TaskItem from './TaskItem';
 import { memo } from 'react';
+import TaskItem from './TaskItem';
 
 const TaskList = ({
   tasks,

@@ -1,23 +1,23 @@
 import { Button, Flex, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { addNewTaskAction, setNewTaskTitleAction } from '../redux/actions';
+import { addNewTask, setNewTaskTitle } from './../redux/tasksSlice';
 
 const InputTask = () => {
-  const newTaskTitle = useSelector(store => store.newTaskTitle);
+  const newTaskTitle = useSelector(state => state.newTaskTitle);
   const dispatch = useDispatch();
 
-  const setNewTaskTitle = event => {
-    dispatch(setNewTaskTitleAction(event.target.value));
+  const setNewTodoTitle = event => {
+    dispatch(setNewTaskTitle({ newTaskTitle: event.target.value }));
   };
 
-  const addNewTask = () => {
-    if (!newTaskTitle) {
+  const addNewTodo = () => {
+    if (!newTaskTitle.trim()) {
       toast.error('Название задачи не может быть пустым');
       return;
     }
 
-    dispatch(addNewTaskAction(newTaskTitle));
+    dispatch(addNewTask({ newTaskTitle }));
     toast.success('Новая задача успешно добавлена');
   };
 
@@ -26,11 +26,11 @@ const InputTask = () => {
       <Input
         value={newTaskTitle}
         placeholder="Введите название задачи..."
-        onChange={setNewTaskTitle}
+        onChange={setNewTodoTitle}
         autoFocus
-        onPressEnter={addNewTask}
+        onPressEnter={addNewTodo}
       />
-      <Button type="primary" onClick={addNewTask}>
+      <Button type="primary" onClick={addNewTodo}>
         Добавить
       </Button>
     </Flex>
