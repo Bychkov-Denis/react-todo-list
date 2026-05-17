@@ -29,8 +29,8 @@ const TaskItem = ({ task }) => {
   } = theme.useToken();
 
   const dispatch = useDispatch();
-  const editingTaskId = useSelector(state => state.editingTaskId);
-  const editingTaskTitle = useSelector(state => state.editingTaskTitle);
+  const editingTaskId = useSelector(state => state.tasks.editingTaskId);
+  const editingTaskTitle = useSelector(state => state.tasks.editingTaskTitle);
 
   const isTaskEditing = editingTaskId === task.id;
 

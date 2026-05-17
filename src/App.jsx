@@ -12,7 +12,7 @@ import TaskFilter from './components/TaskFilter';
 import TaskList from './components/TaskList';
 
 function App() {
-  const tasks = useSelector(store => store.tasks);
+  const tasks = useSelector(store => store.tasks.tasks);
   const [filter, setFilter] = useState('all');
 
   const filteredTasks = useMemo(() => {

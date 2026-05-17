@@ -1,10 +1,14 @@
 import { Button, Flex, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { addNewTask, setNewTaskTitle } from './../redux/tasksSlice';
+import {
+  addNewTask,
+  selectNewTaskTitle,
+  setNewTaskTitle,
+} from './../redux/tasksSlice';
 
 const InputTask = () => {
-  const newTaskTitle = useSelector(state => state.newTaskTitle);
+  const newTaskTitle = useSelector(selectNewTaskTitle);
   const dispatch = useDispatch();
 
   const setNewTodoTitle = event => {

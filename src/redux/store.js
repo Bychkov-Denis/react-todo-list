@@ -11,7 +11,9 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, tasksReducer);
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: {
+    tasks: persistedReducer,
+  },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {

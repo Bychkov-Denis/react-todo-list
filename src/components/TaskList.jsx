@@ -15,12 +15,15 @@ const TaskList = ({
     all: 'Список задач пуст',
   };
 
-  return tasks.length === 0 ? (
-    <Empty
-      description={message[currentFilter] || message.all}
-      style={{ marginTop: '50px' }}
-    />
-  ) : (
+  if (tasks.length === 0) {
+    return (
+      <Empty
+        description={message[currentFilter] || message.all}
+        style={{ marginTop: '50px' }}
+      />
+    );
+  }
+  return (
     <Flex vertical gap="small">
       {tasks.map(task => (
         <TaskItem

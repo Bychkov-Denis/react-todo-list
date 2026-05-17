@@ -49,6 +49,9 @@ export const tasksSlice = createSlice({
       ((state.editingTaskId = null), (state.editingTaskTitle = ''));
     },
   },
+  selectors: {
+    selectNewTaskTitle: state => state.newTaskTitle,
+  },
 });
 
 export const {
@@ -61,4 +64,7 @@ export const {
   startTaskEditing,
   stopTaskEditing,
 } = tasksSlice.actions;
+
+export const { selectNewTaskTitle } = tasksSlice.selectors;
+
 export default tasksSlice.reducer;
